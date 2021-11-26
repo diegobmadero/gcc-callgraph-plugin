@@ -9,7 +9,7 @@ RUN apt-get install -y gcc g++ git make graphviz python3 python3-dev \
 WORKDIR /tmp
 RUN git clone https://github.com/davidmalcolm/gcc-python-plugin.git
 WORKDIR /tmp/gcc-python-plugin
-RUN make -j$(nproc) install PYTHON=python3 PYTHON_CONFIG=python3-config
+RUN make -j$(nproc) install PYTHON=python3 PYTHON_CONFIG=python3-config PYTHON_LIBS=$(pkg-config --cflags python3)
 RUN rm -rf /tmp/gcc-python-plugin
 
 RUN mkdir /plugin
